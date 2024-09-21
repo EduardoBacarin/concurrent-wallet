@@ -4,7 +4,7 @@
 
 This project is for portfolio only. Consists in a Money Wallet where you can debit or credit some value, the idea in this project is simple, but when we put some concurrency it became very different, "it's not only a CRUD". I think the best approach is using a buffer table and some statement table in MongoDB, but here I'll use PostgreSQL.
 
-In this project I use some Laravel features, like Queues, Jobs, Observers, custom Exceptions and Form Requests.
+In this project I use some Laravel features, like Queues, Jobs, Observers, custom Exceptions and Form Requests.<br>
 It's possible to use "exists" and "unique" in Form Requests to validate email, but I prefer to use in code validation to use the correct HTTP Code in response.
 
 You can find a Postman Collection in project root followed by name "postman-collection.json", you can import this file in your Postman and test the endpoints.
@@ -13,7 +13,7 @@ You can see other projects with in my GitHub profile: <a href="https://github.co
 
 **What is concurrency?**
 
-Concurrency means multiple computations are happening at the same time. - <a href="https://web.mit.edu/6.005/www/fa14/classes/17-concurrency/">MIT</a>
+Concurrency means multiple computations are happening at the same time. - <a href="https://web.mit.edu/6.005/www/fa14/classes/17-concurrency/">MIT</a><br>
 What's the problem? In a wallet service, imagine you have only "US$10.00" in your wallet. If you try to withdraw "US$10.00" twice at exactly the same time, without proper concurrency handling, you might end up withdrawing "US$20.00", even though there is only "US$10.00" in the wallet. This results in money being multiplied. So, in a financial service, you MUST handle concurrency.
 
 Here's a paper from the Department of Computer Science at Columbia University that explains what a <a href="https://www.usenix.org/system/files/conference/hotpar12/hotpar12-final44.pdf">Concurrency Attack</a> is and the associated problems.
