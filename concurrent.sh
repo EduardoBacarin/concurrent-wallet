@@ -1,0 +1,12 @@
+#!bin/bash
+
+for i in {1..1000}
+do
+    curl --location 'http://127.0.0.1:8000/api/wallet/debit' \
+    --header 'Accept: application/json' \
+    --header 'Content-Type: application/json' \
+    --header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5ZDBmN2E2YS1mMWYyLTRhOWMtYjcyMC00MzJiYzkzMGI1OTYiLCJqdGkiOiIzZmU5YjNjZjgxY2FkYThiNWNkMjIzYjIzOTExYjg3ZDc5ZWJiMzRiMDcxOGNiYzc2YjRkZTk5NTYzYmJjMDUwMmM4ZGE2N2UwZDVhNWRmOSIsImlhdCI6MTcyODk1NzIxNi41OTcwMzcsIm5iZiI6MTcyODk1NzIxNi41OTcwNCwiZXhwIjoxNzYwNDkzMjE2LjU5MDE4Nywic3ViIjoiZjIzZmVhOGYtZjhkOC00NWU1LWEwYWMtMzdmYTk1MDRkMjU0Iiwic2NvcGVzIjpbXX0.i14O7GuVFe-I0I9VgX2T1zzZ16MNlpEPzqSh5AA0w7JcNbAw6O38jrUa7qApYPA8Oy3h2LMEUIKIj0n3MOfG74xaVyo57oRMxwC7AOrRj2SA8m1urxI2TvF5aKn5tFvVR32E5ru7l_8U-BwOXn4UtEVwX1iv7QzeZoGJUGWLkWvypgvAeUFLwQBKoBDya2GqPVPH4QfwJPOfV4Pr3M85mliCnP7OFn0y6FS-YM_7qJr5D39wWOihzM28JD9BrHxDWHuHqcNaW7Mc7F2ILtzDKhO0nZCpA3zY5T1LZF3bWjaWolamz8zHwtyMWH5jAljTNUDc8ZL1URSOlGCjkwOZAWtNgVg2XB4Tp4eokepKYU3icGOQjWJc6tEXWfLvP3k2DwKS22sNKsg36bHF0-cycorm644zVWWpmERkMtTZDLXWhMQfjDYGfu2Jd8gVDGDtkwjnjvu-K5abKLqAuDux3Fuz3rxANqQOfQJrh-hQak-F-gxQUbUhWcs77kbxuBf9YpJzwTqbQzdhBr_rNrCvtI-He49_p3BQ2TG021OhxYbXaCkgXwCj3MIvK1jQchCtdjggcAuPNwNxDCJe1EneqgMFXvFkeIDWi7uSJ7FD_uA7mCGWpFY44SBpbfR1gpkAE_qO-ArSwifaaFnE5O0mQv2i5RmkamNN6UmGBQnXd94' \
+    --data '{
+        "amount": 150
+    }'
+done

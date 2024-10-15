@@ -7,6 +7,8 @@ This project is for portfolio only. Consists in a Money Wallet where you can deb
 In this project I use some Laravel features, like Queues, Jobs, Observers, custom Exceptions and Form Requests.<br>
 It's possible to use "exists" and "unique" in Form Requests to validate email, but I prefer to use in code validation to use the correct HTTP Code in response.
 
+The "amount" field is INTEGER, so "100" is equal to "1.00".
+
 You can find a Postman Collection in project root followed by name "postman-collection.json", you can import this file in your Postman and test the endpoints.
 
 You can see other projects with in my GitHub profile: <a href="https://github.com/EduardoBacarin">https://github.com/EduardoBacarin</a>
@@ -17,7 +19,6 @@ Concurrency means multiple computations are happening at the same time. - <a hre
 What's the problem? In a wallet service, imagine you have only "US$10.00" in your wallet. If you try to withdraw "US$10.00" twice at exactly the same time, without proper concurrency handling, you might end up withdrawing "US$20.00", even though there is only "US$10.00" in the wallet. This results in money being multiplied. So, in a financial service, you MUST handle concurrency.
 
 Here's a paper from the Department of Computer Science at Columbia University that explains what a <a href="https://www.usenix.org/system/files/conference/hotpar12/hotpar12-final44.pdf">Concurrency Attack</a> is and the associated problems.
-
 
 ### Disclaimer about Docker
 
@@ -37,10 +38,12 @@ It was tested on Linux Mint too.
 2. Copy .env.example and rename to .env
 3. Copy .rr.yaml.example and rename to .rr.yaml
 4. Configure .env file as your system
-4. Generate Application key
+5. Generate Application key
+
 ```
     php artisan key:generate
 ```
+
 5. Install all dependencies
 
 ```
@@ -105,6 +108,7 @@ Responses:
         "message": "User creation failed"
     }
 ```
+
 **_ HTTP Code 409 - Conflict - User already exists _**
 
 ```
@@ -210,7 +214,6 @@ Body:
 
 Responses:
 
-
 **_ HTTP Code 201 - Created _**
 
 ```
@@ -228,5 +231,153 @@ Responses:
         "success": false,
         "code": 400,
         "message": "Logout has failed, contact support team"
+    }
+```
+
+### Wallet
+
+#### Credit
+
+[POST] /api/wallet/credit
+
+This endpoint credit some amount in user's balance.
+
+Headers:
+
+| Header        | Value            |
+| ------------- | ---------------- |
+| Accept        | application/json |
+| Content-type  | application/json |
+| Authorization | Bearer ...       |
+
+Body: JSON
+
+| Property | Description      | Required | Condition | Type    |
+| -------- | ---------------- | -------- | --------- | ------- |
+| amount   | Amount to credit | yes      | ----      | Integer |
+
+Responses:
+
+**_ HTTP Code 201 - Created _**
+
+```
+    {
+        "success": true,
+        "code": 201,
+        "message": "Amount credited successfully",
+        "data": {
+            "transaction_id": "abcde-1234-efhghz-123aszd"
+        }
+    }
+```
+
+**_ HTTP Code 400 - Bad Request - An error has occurred _**
+
+```
+    {
+        "success": false,
+        "code": 400,
+        "message": "Amount cannot be credited"
+    }
+```
+
+**_ HTTP Code 422 - Unprocessable Entity - Validation error _**
+
+```
+    {
+        "success": false,
+        "code": 422,
+        "message": "Amount cannot be less than 1"
+    }
+```
+
+#### Debit
+
+[POST] /api/wallet/debit
+
+This endpoint debit some amount from user's balance.
+
+Headers:
+
+| Header        | Value            |
+| ------------- | ---------------- |
+| Accept        | application/json |
+| Content-type  | application/json |
+| Authorization | Bearer ...       |
+
+Body: JSON
+
+| Property | Description     | Required | Condition | Type    |
+| -------- | --------------- | -------- | --------- | ------- |
+| amount   | Amount to debit | yes      | ----      | Integer |
+
+Responses:
+
+**_ HTTP Code 201 - Created _**
+
+```
+    {
+        "success": true,
+        "code": 201,
+        "message": "Amount debited successfully"
+    }
+```
+
+**_ HTTP Code 400 - Bad Request - An error has occurred _**
+
+```
+    {
+        "success": false,
+        "code": 400,
+        "message": "Amount cannot be debited"
+    }
+```
+
+**_ HTTP Code 422 - Unprocessable Entity - Validation error _**
+
+```
+    {
+        "success": false,
+        "code": 422,
+        "message": "Amount cannot be less than 1"
+    }
+```
+
+#### Balance
+
+[POST] /api/wallet/balance
+
+This endpoint returns user's balance.
+
+Headers:
+
+| Header        | Value            |
+| ------------- | ---------------- |
+| Accept        | application/json |
+| Content-type  | application/json |
+| Authorization | Bearer ...       |
+
+Responses:
+
+**_ HTTP Code 200 - Ok _**
+
+```
+    {
+        "success": true,
+        "message": "Balance retrieved succesffully",
+        "code": 200,
+        "data": {
+            "amount": 10000
+        }
+    }
+```
+
+**_ HTTP Code 400 - Bad Request - An error has occurred _**
+
+```
+    {
+        "success": false,
+        "message": "An error has occurred",
+        "code": 400
     }
 ```
