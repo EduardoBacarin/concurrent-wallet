@@ -2,7 +2,7 @@
 
 **WORK IN PROGRESS**
 
-This project is for portfolio only. Consists in a Money Wallet where you can debit or credit some value, the idea in this project is simple, but when we put some concurrency it became very different, "it's not only a CRUD". I think the best approach is using a buffer table and some statement table in MongoDB, but here I'll use PostgreSQL.
+This project is for portfolio only. Consists in a Money Wallet where you can debit or credit some value, the idea in this project is simple, but when we put some concurrency it became a little different, "it's not only a CRUD".
 
 In this project I use some Laravel features, like Queues, Jobs, Observers, custom Exceptions and Form Requests.<br>
 It's possible to use "exists" and "unique" in Form Requests to validate email, but I prefer to use in code validation to use the correct HTTP Code in response.
