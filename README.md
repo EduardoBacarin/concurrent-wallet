@@ -1,4 +1,4 @@
-## Movie History Documentation
+## Concurrent Wallet Documentation
 
 **WORK IN PROGRESS**
 
