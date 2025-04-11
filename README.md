@@ -1,7 +1,5 @@
 ## Concurrent Wallet Documentation
 
-**WORK IN PROGRESS**
-
 This project is for portfolio only. Consists in a Money Wallet where you can debit or credit some value, the idea in this project is simple, but when we put some concurrency it became a little different, "it's not only a CRUD".
 
 In this project I use some Laravel features, like Queues, Jobs, Observers, custom Exceptions and Form Requests.<br>
